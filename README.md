@@ -147,8 +147,6 @@ This sample code demontrate a inter-service communication between: **OrderServic
 ### Typical package structure
 ![Package diagram](/assets/Packages-Diagram.png "Package diagram")
 
-### Test cases
-### How to run
 ### APIs
 
 #### Product Service
@@ -199,9 +197,51 @@ This sample code demontrate a inter-service communication between: **OrderServic
             "price": 10000
         }
 
+### How to run
+Clone the code to local directory (`DEMO_HOME`)
 
+#### Start applications
+1. Start Eureuka service discovery
+In terminal, open a new tab
 
+        # cd DEMO_HOME/eureka-naming-server
+        # mnv spring-boot:run
 
+Wait util see `Tomcat started on port(s): 8761 (http) ...` --> Eureka is ready on `localhost:8761`, access locahost:8761 on browser to see Eureka web ui
+
+2. Start Product service
+In terminal, open another new tab
+
+        # cd DEMO_HOME/product-service
+        # mnv spring-boot:run
+        
+Wait util see `Tomcat started on port(s): 8000 (http)...` --> Product service is ready on `localhost:8000`
+
+3. Start Order service
+In terminal, open another new tab
+
+        # cd DEMO_HOME/product-service
+        # mnv spring-boot:run
+
+Wait util see `Tomcat started on port(s): 9000 (http)...` --> Order service is ready on `localhost:9000`
+
+#### API test
+1. Get list of product
+
+        # curl -v -X GET http://localhost:8080/products
+        
+2. Get a product by id
+
+        # curl -v -X GET http://localhost:8080/products/1
+        
+3. Create order
+3.1 Order quantity is ready to place
+
+        curl -v -X POST localhost:9000/orders -H 'Content-type:application/json' -d '{"productId": 1, "customerEmail": "customer@mail.com", "productQuantity": 1}'
+        
+3.2 Order quantity is greater than quantity in inventory
+
+        curl -v -X POST localhost:9000/orders -H 'Content-type:application/json' -d '{"productId": 1, "customerEmail": "customer@mail.com", "productQuantity": 1000}'
 
 
 

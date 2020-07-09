@@ -1,6 +1,6 @@
 # SIMPLE ECOMMERCE APPLICATION
-This page aims to provide an **overall technical design** for a basic E-COMMERCE web application by using Java and Microservices.
-Also, provide a sample code of **inter-services communication**
+This page aims to provide an **Overall Technical Design** for a basic E-COMMERCE web application by using Java and Microservices.
+Also, provide a sample code of **Inter-Service Communication**
 
 # Software Requirements
 This eCommerce web app should be used by **2 actors** (Customers & Administrator) and have some significant requirements
@@ -144,7 +144,8 @@ A typical ERD for this eCommerce site
 ### Description
 This sample code demontrate a inter-service communication between: **OrderService and ProductService by using Feign** (sync call)
 
-### Package structure
+### Typical package structure
+![Package diagram](/assets/Packages-Diagram.png "Package diagram")
 
 ### Test cases
 ### How to run

@@ -229,19 +229,68 @@ In terminal, open another new tab
 Wait util see `Tomcat started on port(s): 9000 (http)...` --> Order service is ready on `localhost:9000`
 
 #### API test
-1. Get list of product
-
-        # curl -v -X GET http://localhost:8080/products
+Note that seed data was set during the startup.
+Seed data includes only one product with `id = 1`
         
-2. Get a product by id
+1. Get a product by `id = 1`
 
-        # curl -v -X GET http://localhost:8080/products/1
+        # curl -v http://localhost:8000/products/1
         
-3. Create order
-3.1 Order quantity is ready to place
+   Returned payload
+   ``{"id":1,"name":"MacBook Pro 2020","description":"The brand new","quantity":5}``
+   
+2. Create order
+`Create order` would do a *inter-service communication* by calling to `product-service` via Feign proxy for checking inventory quantity against ordered quantity. 
 
-        curl -v -X POST localhost:9000/orders -H 'Content-type:application/json' -d '{"productId": 1, "customerEmail": "customer@mail.com", "productQuantity": 1}'
+2.1 Order quantity is ready to place
+
+        curl -v -X POST localhost:9000/orders -H 'Content-type:application/json' -d '{"customerEmail": "customer@mail.com", "productId": 1, "price": 1000, "quantity": 1}'
         
-3.2 Order quantity is greater than quantity in inventory
+   Returned payload
+   
+      < HTTP/1.1 201 
+      < Location: http://localhost:9000/orders/1
+      < Content-Type: text/plain;charset=UTF-8
+      < Content-Length: 30
+      < Date: Thu, 09 Jul 2020 16:13:33 GMT
+      < 
+      * Connection #0 to host localhost left intact
+      Order was successfully created
+        
+   As you see, in response header, it returns the location of newly created order `Location: http://localhost:9000/orders/1`
+   Let check it out
+   
+      # curl -v http://localhost:9000/orders/1
+   
+   Returned payload
+   
+      {
+        "id":1,
+        "code":"O-239558",
+        "orderDate":"2020-07-09T16:13:33.250Z",
+        "subTotal":1000.0,
+        "tax":null,
+        "discount":null,
+        "total":1000.0,
+        "status":"CONFIRMED",
+        "customerEmail":"customer@mail.com"
+     }
+      
+2.2 Order quantity is greater than quantity in inventory  --> invalid
 
-        curl -v -X POST localhost:9000/orders -H 'Content-type:application/json' -d '{"productId": 1, "customerEmail": "customer@mail.com", "productQuantity": 1000}'
+        curl -v -X POST localhost:9000/orders -H 'Content-type:application/json' -d '{"customerEmail": "customer@mail.com", "productId": 1, "price": 1000, "quantity": 1000}'
+       
+  Returned payload
+  
+    < HTTP/1.1 400 
+    < Content-Type: text/plain;charset=UTF-8
+    < Content-Length: 34
+    < Date: Thu, 09 Jul 2020 16:26:44 GMT
+    < Connection: close
+    < 
+    * Closing connection 0
+    Not enough quantity to place order
+
+  As you see, the quantity to order exceeds the quantity in inventory, so it returns a response with `statusCode=400` (bad request) and a message `Not enough quantity to place order`
+  
+  

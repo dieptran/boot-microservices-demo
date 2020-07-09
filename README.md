@@ -39,7 +39,8 @@ To adapt the software specs, Java Spring-based techologies, Netflix OSS and Micr
   - Easy to test, scaling per service
   - ...
 
-## Overal Architecture
+## Overall Architecture
+![Overall Architecture](/assets/Overall-Architecture.png "Overall Architecture")
 
 ## Technical Stack
 - Backend: Java, Spring Cloud, Netflix OSS

@@ -1,4 +1,4 @@
-# MVP E-COMMERCE APPLICATION
+# SIMPLE E-COMMERCE APPLICATION
 This page aims to provide an **Overall Technical Design** for a basic E-COMMERCE web application by using Java and Microservices.
 Also, provide a sample code of **Inter-Service Communication**
 

@@ -150,50 +150,50 @@ A typical ERD for this eCommerce site
 #### Product Service
 `Host: localhost:8000`
 
-*GET PRODUCT BY ID*
+1. GET PRODUCT BY ID
 
-    GET /products/{id}
+        GET /products/{id}
 
-    Params:
-        - id (Long): identifier of product
+        Params:
+            - id (Long): identifier of product
 
-*CHECK PRODUCT AVAIBILITY*
+2. CHECK PRODUCT AVAIBILITY
 
-    GET /products/{id}/avaibility/{orderQuantity}
+        GET /products/{id}/avaibility/{orderQuantity}
 
-    Params:
-        - id (Long): identifier of product
-        - orderQuantity (Int): product quantity for checking
+        Params:
+            - id (Long): identifier of product
+            - orderQuantity (Int): product quantity for checking
 
-*DESCREASE PRODUCT QUANTITY*
+3. DESCREASE PRODUCT QUANTITY
 
-    PUT /products/{id}/decreaseQuantity/{orderedQuantity}
-    
-    Params:
-        - id (Long): identifier of product
-        - orderQuantity (Int): quantity of product placed order and need to be subtract in inventory
+        PUT /products/{id}/decreaseQuantity/{orderedQuantity}
+
+        Params:
+            - id (Long): identifier of product
+            - orderQuantity (Int): quantity of product placed order and need to be subtract in inventory
 
 #### Order Service
 `Host: localhost:9000`
 
-*GET ORDER BY ID*
+1. GET ORDER BY ID*
 
-    GET /orders/{id}
+        GET /orders/{id}
+
+        Params:
+            - id (Long): identify of order
+
+2. PLACE NEW ORDER
+
+        POST /orders
     
-    Params:
-        - id (Long): identify of order
-
-*PLACE NEW ORDER*
-
-    POST /orders
-    
-    Request body (JSON):
-    {
-        "productId": 1,
-        "customerEmail": "michel@mail.com",
-        "quantity": 1,
-        "price": 10000
-    }
+        Request body (JSON):
+        {
+            "productId": 1,
+            "customerEmail": "michel@mail.com",
+            "quantity": 1,
+            "price": 10000
+        }
 
 
 

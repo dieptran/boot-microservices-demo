@@ -68,50 +68,65 @@ Basically, a combine of Java Spring-based + Netflix OSS + Microservices parttern
 ### Microservices
 Splitting into micro services to manage their own logic on separated databases
 
-### A few big challenges
+### A few challenges
 Using microservices principle means that we would have more than 1 backend app. This raises some tackles as below
-#### Data 
-To fllow de-coupling pattern in Microservices, we should apply Database-Per-Service pattern, it means: each service has it own database.
+#### Privately data
+To ensure the service is independant and its data should be privately and accessible only via its API, we apply [Database Per Service] pattern, it means: each service has it own database.
 This allow us to use the best kind of database for each kind of data that the service handles. For example: for complex data as UserBehavior or ProductCatalog with different product dataset, we should use NoSQL.
 
-**Solution**: apply [Database per Service] pattern
+**Solution**: apply [Database Per Service] pattern
 
 ![Database per Service](/assets/Services-With-DB.png "Database per Service")
 
-#### Inter-services communication
+#### Inter-service communication
 In monolothith app, interacting between modules/services is easy via functions calling.
 However, in microservices architect, that's imposible because the services are deployed as independent apps. Actually, a service can invoke another service by directly call via Restful client, but what if destination service is unreachable? or long run? or the service's address was changed? 
 This comes up some patterns to deal with this in microservices
 
-- Use a **RestClient** like Feign/RestTemplate come with a service discovery and a load blancer 
-  - A load-balancer (Ribbon): ensure call another alive instance for durable 
+- Use a **RestClient** like Feign/RestTemplate comes with a service discovery and a load blancer 
+  - A load-balancer (Ribbon): ensure call another alive instance for durability
   - A service discovery (Eureka): ensure to use logical service name, instead of physical name (e.g. ip/port) when a new service instance is launched
 
 This kind of communication is ok for **simple calls or synchronus call** when the thread wait for the response to handle next steps.
 
 But what if **Asynchronus calls** (e.g. send "new order confirmed" when orders successlly placed that we don't need to wait for)
 
-- Use **Message broker** as a middle man to store all messages produced by source service and then let a subcribed service consumes the messsage. Even in case of no subcribed services to consume, the message is still the in the queue, wait for until consuming, avoid data lost.
+- Use **Message broker** as a middle man to store all messages produced by source service and then let a subcribed service consumes the messsage. Even in case of no subcribed services to consume, the message is still the in the queue, wait for until consuming --> avoid data lost.
 
-Sample of 2 kind of inter-services communication
+Sample of 2 kinds of inter-services communication
 
 ![inter-services communication](/assets/Inter_Service-Communication.png)
 
 
 #### Distributed transaction management
-Some actions need to span across multiple services that data stored in separated database to complete. How to rollback data if one of those service are failure to ensure all data is consistence
-**Solution**: apply Command/SAGA pattern to handle
+Some actions need to span across multiple services that data stored in separated database to complete. How to rollback data if one of those services are failure?
+**Solution**: apply [Command/SAGA] pattern to handle
 
 ![Command/SAGA](/assets/CQRS-Saga_Orchestration.png)
 
-#### Fault tolenrant
-If a service, somehow, cannot proceed its logic in right way e.g. get stuck. How to pypass to release waiting?
+#### Fault tolerance
+If a service somehow takes long time to finish due to network latency or service failure even. How to pypass to release long wait-queue?
+**Solution**: apply [Circuit Breaker] (https://martinfowler.com/bliki/CircuitBreaker.html) by using Netflix Hystrix (as a part of Spring framework) 
 
 #### Monitoring to troubleshoot problems
-When an incident comes, how to check logs or trace the request when the services are on multiple instances? 
+When an incident comes, how to check the logs or trace the requests when the services are on multiple instances?
+
+**Solution**: apply [Log Aggregation] pattern that all logs in every service instance would be sent to a centralize database, then use an query UI tool for tracking. We can use ELK or EFK: ElasticSearch for storage, Logtash/Fluentd agent for sending log, Kibana for query UI tool
 
 ### Frontend
-### Data Persistence
+Uses mordern technologies:
+- React: to build independent UI component that instantly reflect UI part with latest data
+- Redux: to manage state of React app
+- NextJS: a React framework that supports routing, pre-rendering, caching, etc...
+- JS SDK: generated from our Microservices APIs to reduce the complexity when calling APIs from client side
+- [Bit](bit.dev) (*Optional*): to build, manage, reuse and test React components 
+
+The app should be **auto-responsive** and **progressive** if possible
+
+### Data Storage
+We use Spring JPA/Hibernate as an ORM abstraction peristence layer to communicate with database.
+The below ERD is used to define entity-mapping in JPA/Hibernate
+
 #### ERD
 A typical ERD for this eCommerce site
 
@@ -121,7 +136,9 @@ A typical ERD for this eCommerce site
 - *PostgreSQL*: for Commerce/Inventory/... services to be able use ACID when data is sensity and need to be run in BI system later
 - *MongoDB*: for Product Catalog service or UserBehaviors analytics when its data mostly is un-structured, complex data.
 - *ElasticSeach*: for Search service that support full-text search and many more interesting featured like auto-suggestion, facted search, advance details search (colors, category...)
+
 ## Deployment plan
+
 # Demo code for services inter-communication
 
 

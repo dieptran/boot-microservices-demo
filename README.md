@@ -1,8 +1,8 @@
-# Boot-microservices-demo
-This page aims to provide an **overal technical design** for a basic E-COMMERCE web application by using Java and Microservices.
-Also, provide a sample code of **services inter-communication**
+# SIMPLE ECOMMERCE APPLICATION
+This page aims to provide an **overall technical design** for a basic E-COMMERCE web application by using Java and Microservices.
+Also, provide a sample code of **inter-services communication**
 
-# Software Specification
+# Software Requirements
 This eCommerce web app should be used by **2 actors** (Customers & Administrator) and have some significant requirements
 
 ### Functional Requirements
@@ -26,7 +26,14 @@ This eCommerce web app should be used by **2 actors** (Customers & Administrator
 
 # Technical Design
 ## Overview
-To adapt the software specs, Java Spring-based techologies, Netflix OSS and Microservices parttern are choosen for development
+This application would consists 2 main part:
+- Frontend (storefront web ui)
+- Backend (Resful APIs)
+
+The main flow looks like this:
+FRONTEND ---- *async send request* --->> BACKEND --->> * handle logic & send response* --->> FRONTEND (update state to refresh ui part)
+
+Basically, a combine of Java Spring-based + Netflix OSS + Microservices parttern are chosen for Backend development. And SinglePageApp with React + Redux + NextJS are chosen for Frontend.
 
 **The reasons**
 - Java Spring
@@ -38,6 +45,12 @@ To adapt the software specs, Java Spring-based techologies, Netflix OSS and Micr
 - Microservices
   - Easy to test, scaling per service
   - ...
+- SinglePageApp with React/Redux/NextJS
+  - Mature, large community
+  - Fast loading
+  - Support both of types of rendering: client side (CSR) + server side (SSR)
+  - Component oriented
+  - Page pre-rendering with cache (thanks for Nextjs)
 
 ## Overall Architecture
 ![Overall Architecture](/assets/Overall-Architecture.png "Overall Architecture")
@@ -58,8 +71,13 @@ Splitting into micro services to manage their own logic on separated databases
 ### A few big challenges
 Using microservices principle means that we would have more than 1 backend app. This raises some tackles as below
 #### Data 
+To fllow de-coupling pattern in Microservices, we should apply Database-Per-Service pattern, it means: each service has it own database.
+This allow us to use the best kind of database for each kind of data that the service handles. For example: for complex data as UserBehavior or ProductCatalog with different product dataset, we should use NoSQL.
+
+HINH
 
 #### Inter-services communication
+
 
 #### Distributed transaction management
 Some actions need to span across multiple services that data stored in separated database to complete. How to rollback data if one of those service are failure to ensure all data is consistence

@@ -142,7 +142,10 @@ A typical ERD for this eCommerce site
 
 # Demo code for Inter-Service Communication
 ### Description
+This sample code demontrate a inter-service communication between: **OrderService and ProductService by using Feign** (sync call)
+
 ### Package structure
+
 ### Test cases
 ### How to run
 ### APIs

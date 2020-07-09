@@ -1,4 +1,4 @@
-# SIMPLE ECOMMERCE APPLICATION
+# MVP E-COMMERCE APPLICATION
 This page aims to provide an **Overall Technical Design** for a basic E-COMMERCE web application by using Java and Microservices.
 Also, provide a sample code of **Inter-Service Communication**
 
@@ -101,18 +101,18 @@ Sample of 2 kinds of inter-services communication
 
 #### Distributed transaction management
 Some actions need to span across multiple services that data stored in separated database to complete. How to rollback data if one of those services are failure?
-**Solution**: apply [Command/SAGA] pattern to handle
+*Solution*: apply [Command/SAGA] pattern to handle
 
 ![Command/SAGA](/assets/CQRS-Saga_Orchestration.png)
 
 #### Fault tolerance
 If a service somehow takes long time to finish due to network latency or service failure even. How to pypass to release long wait-queue?
-**Solution**: apply [Circuit Breaker](https://martinfowler.com/bliki/CircuitBreaker.html "Circuit Breaker pattern") by using Netflix Hystrix (as a part of Spring framework) 
+*Solution*: apply [Circuit Breaker](https://martinfowler.com/bliki/CircuitBreaker.html "Circuit Breaker pattern") by using Netflix Hystrix (as a part of Spring framework) 
 
 #### Monitoring to troubleshoot problems
 When an incident comes, how to check the logs or trace the requests when the services are on multiple instances?
 
-**Solution**: apply [Log Aggregation] pattern that all logs in every service instance would be sent to a centralize database, then use an query UI tool for tracking. We can use ELK or EFK: ElasticSearch for storage, Logtash/Fluentd agent for sending log, Kibana for query UI tool
+*Solution*: apply [Log Aggregation] pattern that all logs in every service instance would be sent to a centralize database, then use an query UI tool for tracking. We can use ELK or EFK: ElasticSearch for storage, Logtash/Fluentd agent for sending log, Kibana for query UI tool
 
 ### Frontend
 Uses mordern technologies:
@@ -202,14 +202,16 @@ Clone the code to local directory (`DEMO_HOME`)
 
 #### Start applications
 1. Start Eureuka service discovery
+
 In terminal, open a new tab
 
         # cd DEMO_HOME/eureka-naming-server
         # mnv spring-boot:run
 
-Wait util see `Tomcat started on port(s): 8761 (http) ...` --> Eureka is ready on `localhost:8761`, access locahost:8761 on browser to see Eureka web ui
+Wait util see `Tomcat started on port(s): 8761 (http) ...` --> Eureka is ready on `localhost:8761`, access locahost:8761 on browser to see Eureka web UI
 
 2. Start Product service
+
 In terminal, open another new tab
 
         # cd DEMO_HOME/product-service
@@ -218,9 +220,10 @@ In terminal, open another new tab
 Wait util see `Tomcat started on port(s): 8000 (http)...` --> Product service is ready on `localhost:8000`
 
 3. Start Order service
+
 In terminal, open another new tab
 
-        # cd DEMO_HOME/product-service
+        # cd DEMO_HOME/order-service
         # mnv spring-boot:run
 
 Wait util see `Tomcat started on port(s): 9000 (http)...` --> Order service is ready on `localhost:9000`
@@ -242,10 +245,3 @@ Wait util see `Tomcat started on port(s): 9000 (http)...` --> Order service is r
 3.2 Order quantity is greater than quantity in inventory
 
         curl -v -X POST localhost:9000/orders -H 'Content-type:application/json' -d '{"productId": 1, "customerEmail": "customer@mail.com", "productQuantity": 1000}'
-
-
-
-
-
-
-

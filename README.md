@@ -75,6 +75,7 @@ To fllow de-coupling pattern in Microservices, we should apply Database-Per-Serv
 This allow us to use the best kind of database for each kind of data that the service handles. For example: for complex data as UserBehavior or ProductCatalog with different product dataset, we should use NoSQL.
 
 **Solution**: apply [Database per Service] pattern
+
 ![Database per Service](/assets/Services-With-DB.png "Database per Service")
 
 #### Inter-services communication
@@ -93,12 +94,14 @@ But what if **Asynchronus calls** (e.g. send "new order confirmed" when orders s
 - Use **Message broker** as a middle man to store all messages produced by source service and then let a subcribed service consumes the messsage. Even in case of no subcribed services to consume, the message is still the in the queue, wait for until consuming, avoid data lost.
 
 Sample of 2 kind of inter-services communication
+
 ![inter-services communication](/assets/Inter_Service-Communication.png)
 
 
 #### Distributed transaction management
 Some actions need to span across multiple services that data stored in separated database to complete. How to rollback data if one of those service are failure to ensure all data is consistence
 **Solution**: apply Command/SAGA pattern to handle
+
 ![Command/SAGA](/assets/CQRS-Saga_Orchestration.png)
 
 #### Fault tolenrant
@@ -111,6 +114,7 @@ When an incident comes, how to check logs or trace the request when the services
 ### Data Persistence
 #### ERD
 A typical ERD for this eCommerce site
+
 ![ERD](/assets/Entities_Diagram.png "ERD")
   
 #### In-used DB types

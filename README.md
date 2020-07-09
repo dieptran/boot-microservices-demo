@@ -146,10 +146,63 @@ A typical ERD for this eCommerce site
 ### Test cases
 ### How to run
 ### APIs
-**Get Product by Id**
-`GET /product/{id}`
+
+#### Product Service
+`Host: localhost:8000`
+
+*GET PRODUCT BY ID*
+
+``GET /products/{id}``
+
 Params:
-`id (Long): product id`
+
+``id (Long): identifier of product``
+
+*CHECK PRODUCT AVAIBILITY*
+
+``GET /products/{id}/avaibility/{orderQuantity}``
+
+Params:
+
+``id (Long): identifier of product``
+``orderQuantity (Int): product quantity for checking``
+
+*DESCREASE PRODUCT QUANTITY*
+
+``PUT /products/{id}/decreaseQuantity/{orderedQuantity}``
+
+Params:
+
+``id (Long): identifier of product``
+``orderQuantity (Int): quantity of product placed order and need to be subtract in inventory``
+
+#### Order Service
+`Host: localhost:9000`
+
+*GET ORDER BY ID*
+
+``GET /orders/{id}``
+
+Params:
+
+``id (Long): identify of order``
+
+*PLACE NEW ORDER*
+
+``POST /orders``
+
+Request body (JSON):
+
+``
+{
+    "productId": 1,
+    "customerEmail": "michel@mail.com",
+    "quantity": 1,
+    "price": 10000
+}
+``
+
+
 
 
 

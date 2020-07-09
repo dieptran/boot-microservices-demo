@@ -106,7 +106,7 @@ Some actions need to span across multiple services that data stored in separated
 
 #### Fault tolerance
 If a service somehow takes long time to finish due to network latency or service failure even. How to pypass to release long wait-queue?
-**Solution**: apply [Circuit Breaker] (https://martinfowler.com/bliki/CircuitBreaker.html) by using Netflix Hystrix (as a part of Spring framework) 
+**Solution**: apply [Circuit Breaker] (https://martinfowler.com/bliki/CircuitBreaker.html "Circuit Breaker pattern") by using Netflix Hystrix (as a part of Spring framework) 
 
 #### Monitoring to troubleshoot problems
 When an incident comes, how to check the logs or trace the requests when the services are on multiple instances?
@@ -119,7 +119,7 @@ Uses mordern technologies:
 - Redux: to manage state of React app
 - NextJS: a React framework that supports routing, pre-rendering, caching, etc...
 - JS SDK: generated from our Microservices APIs to reduce the complexity when calling APIs from client side
-- [Bit](bit.dev) (*Optional*): to build, manage, reuse and test React components 
+- [Bit](https://bit.dev "Bit") (*Optional*): to build, manage, reuse and test React components 
 
 The app should be **auto-responsive** and **progressive** if possible
 

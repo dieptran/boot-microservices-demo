@@ -188,19 +188,14 @@ Params:
 ``id (Long): identify of order``
 
 *PLACE NEW ORDER*
-
-``POST /orders``
-
-Request body (JSON):
-
-``
-{
-    "productId": 1,
-    "customerEmail": "michel@mail.com",
-    "quantity": 1,
-    "price": 10000
-}
-``
+  POST /orders
+      *Request body (JSON):*
+      {
+          "productId": 1,
+          "customerEmail": "michel@mail.com",
+          "quantity": 1,
+          "price": 10000
+      }
 
 
 

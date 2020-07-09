@@ -152,40 +152,36 @@ A typical ERD for this eCommerce site
 
 *GET PRODUCT BY ID*
 
-``GET /products/{id}``
+    GET /products/{id}
 
-Params:
-
-``id (Long): identifier of product``
+    Params:
+        - id (Long): identifier of product
 
 *CHECK PRODUCT AVAIBILITY*
 
-``GET /products/{id}/avaibility/{orderQuantity}``
+    GET /products/{id}/avaibility/{orderQuantity}
 
-Params:
-
-``id (Long): identifier of product``
-``orderQuantity (Int): product quantity for checking``
+    Params:
+        - id (Long): identifier of product
+        - orderQuantity (Int): product quantity for checking
 
 *DESCREASE PRODUCT QUANTITY*
 
-``PUT /products/{id}/decreaseQuantity/{orderedQuantity}``
-
-Params:
-
-``id (Long): identifier of product``
-``orderQuantity (Int): quantity of product placed order and need to be subtract in inventory``
+    PUT /products/{id}/decreaseQuantity/{orderedQuantity}
+    
+    Params:
+        - id (Long): identifier of product
+        - orderQuantity (Int): quantity of product placed order and need to be subtract in inventory
 
 #### Order Service
 `Host: localhost:9000`
 
 *GET ORDER BY ID*
 
-``GET /orders/{id}``
-
-Params:
-
-``id (Long): identify of order``
+    GET /orders/{id}
+    
+    Params:
+        - id (Long): identify of order
 
 *PLACE NEW ORDER*
 

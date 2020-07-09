@@ -31,7 +31,7 @@ This application would consists 2 main part:
 - Backend (Resful APIs)
 
 The main flow looks like this:
-FRONTEND ---- *async send request* --->> BACKEND --->> * handle logic & send response* --->> FRONTEND (update state to refresh ui part)
+FRONTEND ---- *async send request* --->> BACKEND --->> *handle logic & send response* --->> FRONTEND (update state to refresh ui part)
 
 Basically, a combine of Java Spring-based + Netflix OSS + Microservices parttern are chosen for Backend development. And SinglePageApp with React + Redux + NextJS are chosen for Frontend.
 
@@ -74,9 +74,26 @@ Using microservices principle means that we would have more than 1 backend app. 
 To fllow de-coupling pattern in Microservices, we should apply Database-Per-Service pattern, it means: each service has it own database.
 This allow us to use the best kind of database for each kind of data that the service handles. For example: for complex data as UserBehavior or ProductCatalog with different product dataset, we should use NoSQL.
 
-HINH
+**Solution**: apply [Database per Service] pattern
+![Database per Service](/assets/Services-With-DB.png "Database per Service")
 
 #### Inter-services communication
+In monolothith app, interacting between modules/services is easy via functions calling.
+However, in microservices architect, that's imposible because the services are deployed as independent apps. Actually, a service can invoke another service by directly call via Restful client, but what if destination service is unreachable? or long run? or the service's address was changed? 
+This comes up some patterns to deal with this in microservices
+
+- Use a **RestClient** like Feign/RestTemplate come with a service discovery and a load blancer 
+  - A load-balancer (Ribbon): ensure call another alive instance for durable 
+  - A service discovery (Eureka): ensure to use logical service name, instead of physical name (e.g. ip/port) when a new service instance is launched
+
+This kind of communication is ok for **simple calls or synchronus call** when the thread wait for the response to handle next steps.
+
+But what if **Asynchronus calls** (e.g. send "new order confirmed" when orders successlly placed that we don't need to wait for)
+
+- Use **Message broker** as a middle man to store all messages produced by source service and then let a subcribed service consumes the messsage. Even in case of no subcribed services to consume, the message is still the in the queue, wait for until consuming, avoid data lost.
+
+Sample of 2 kind of inter-services communication
+![inter-services communication](/assets/Inter_Service-Communication.png)
 
 
 #### Distributed transaction management

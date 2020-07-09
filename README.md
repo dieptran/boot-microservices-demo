@@ -146,11 +146,11 @@ A typical ERD for this eCommerce site
 ### Test cases
 ### How to run
 ### APIs
-- Get Product
-``    GET /product/{id}
-      Return a product payload
-      Params:
-          id (Long): product id
+- Get Product by Id
+``    
+    GET /product/{id}
+    Params:
+      id (Long): product id
 ``
 
 

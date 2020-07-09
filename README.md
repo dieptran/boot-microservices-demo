@@ -58,10 +58,13 @@ Splitting into micro services to manage their own logic on separated databases
 ### A few big challenges
 Using microservices principle means that we would have more than 1 backend app. This raises some tackles as below
 #### Data 
-#### Inter-communication
+
+#### Inter-services communication
 
 #### Distributed transaction management
 Some actions need to span across multiple services that data stored in separated database to complete. How to rollback data if one of those service are failure to ensure all data is consistence
+**Solution**: apply Command/SAGA pattern to handle
+![Command/SAGA](/assets/CQRS-Saga_Orchestration.png)
 
 #### Fault tolenrant
 If a service, somehow, cannot proceed its logic in right way e.g. get stuck. How to pypass to release waiting?
@@ -73,8 +76,7 @@ When an incident comes, how to check logs or trace the request when the services
 ### Data Persistence
 #### ERD
 A typical ERD for this eCommerce site
-
-HINH....
+![ERD](/assets/Entities_Diagram.png "ERD")
   
 #### In-used DB types
 - *PostgreSQL*: for Commerce/Inventory/... services to be able use ACID when data is sensity and need to be run in BI system later

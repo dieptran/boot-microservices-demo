@@ -240,6 +240,7 @@ Seed data includes only one product with `id = 1`
    ``{"id":1,"name":"MacBook Pro 2020","description":"The brand new","quantity":5}``
    
 2. Create order
+
 `Create order` would do a *inter-service communication* by calling to `product-service` via Feign proxy for checking inventory quantity against ordered quantity. 
 
 2.1 Order quantity is ready to place
@@ -258,6 +259,7 @@ Seed data includes only one product with `id = 1`
       Order was successfully created
         
    As you see, in response header, it returns the location of newly created order `Location: http://localhost:9000/orders/1`
+   
    Let check it out
    
       # curl -v http://localhost:9000/orders/1

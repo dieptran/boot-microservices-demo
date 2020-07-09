@@ -106,7 +106,7 @@ Some actions need to span across multiple services that data stored in separated
 
 #### Fault tolerance
 If a service somehow takes long time to finish due to network latency or service failure even. How to pypass to release long wait-queue?
-**Solution**: apply [Circuit Breaker] (https://martinfowler.com/bliki/CircuitBreaker.html "Circuit Breaker pattern") by using Netflix Hystrix (as a part of Spring framework) 
+**Solution**: apply [Circuit Breaker](https://martinfowler.com/bliki/CircuitBreaker.html "Circuit Breaker pattern") by using Netflix Hystrix (as a part of Spring framework) 
 
 #### Monitoring to troubleshoot problems
 When an incident comes, how to check the logs or trace the requests when the services are on multiple instances?

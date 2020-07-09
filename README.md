@@ -141,17 +141,16 @@ A typical ERD for this eCommerce site
 ## Deployment plan
 
 # Demo code for Inter-Service Communication
-## Description
-## Package structure
-## Test cases
-## How to run
-## APIs
+### Description
+### Package structure
+### Test cases
+### How to run
+### APIs
 - Get Product
-``GET /product/{id}
-  Return a product payload
-  Params:
-    id (Long): product id
-  Payload:
+``    GET /product/{id}
+      Return a product payload
+      Params:
+          id (Long): product id
 ``
 
 

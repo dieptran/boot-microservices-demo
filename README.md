@@ -138,8 +138,6 @@ A typical ERD for this eCommerce site
 - *MongoDB*: for Product Catalog service or UserBehaviors analytics when its data mostly is un-structured, complex data.
 - *ElasticSeach*: for Search service that support full-text search and many more interesting featured like auto-suggestion, facted search, advance details search (colors, category...)
 
-## Deployment plan
-
 # Demo code for Inter-Service Communication
 ### Description
 This sample code demontrate a inter-service communication between: **OrderService and ProductService by using Feign** (sync call)

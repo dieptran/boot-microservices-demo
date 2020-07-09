@@ -44,6 +44,7 @@ Basically, a combine of Java Spring-based + Netflix OSS + Microservices parttern
   - Developed by Netflix team that experienced in large-scale and highly avaibility system development
 - Microservices
   - Easy to test, scaling per service
+  - Easy to maintain and develop
   - ...
 - SinglePageApp with React/Redux/NextJS
   - Mature, large community

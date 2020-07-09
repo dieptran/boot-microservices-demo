@@ -206,7 +206,7 @@ Clone the code to local directory (`DEMO_HOME`)
 In terminal, open a new tab
 
         # cd DEMO_HOME/eureka-naming-server
-        # mnv spring-boot:run
+        # mvn spring-boot:run
 
 Wait util see `Tomcat started on port(s): 8761 (http) ...` --> Eureka is ready on `localhost:8761`, access locahost:8761 on browser to see Eureka web UI
 
@@ -215,7 +215,7 @@ Wait util see `Tomcat started on port(s): 8761 (http) ...` --> Eureka is ready o
 In terminal, open another new tab
 
         # cd DEMO_HOME/product-service
-        # mnv spring-boot:run
+        # mvn spring-boot:run
         
 Wait util see `Tomcat started on port(s): 8000 (http)...` --> Product service is ready on `localhost:8000`
 
@@ -224,7 +224,7 @@ Wait util see `Tomcat started on port(s): 8000 (http)...` --> Product service is
 In terminal, open another new tab
 
         # cd DEMO_HOME/order-service
-        # mnv spring-boot:run
+        # mvn spring-boot:run
 
 Wait util see `Tomcat started on port(s): 9000 (http)...` --> Order service is ready on `localhost:9000`
 

@@ -56,6 +56,46 @@ Basically, a combine of Java Spring-based + Netflix OSS + Microservices parttern
 ## Overall Architecture
 ![Overall Architecture](/assets/Overall-Architecture.png "Overall Architecture")
 
+EXPLANATIONS
+
+- Microservices
+  - Heart of the backend app, handle all logics and process data
+  - It consists all micro services, each service handle logic/data for its own domain
+  - One service has one or multiple instances (or containers)
+  - Inter-service communication would be used via:
+    - Rest client (e.g. Feign, RestTemplate, HttpClient) for syn calls
+    - Message broker (e.g. RabbitMQ, Kafka,...) for acyns calls 
+  - Services know each other via logical name (not physical name like IP:port) by using a Service Discovery (Eureka, Consul,...) that auto track and manage service statuse
+- API Gateway (Zull, Kong...)
+  - Create single point for client's access
+  - Manage things like
+    - authentication, authority via Auth server that can connect or communicate with other external systems (e.g. Facebook)
+    - ratelimit
+    - routing...
+- Config server (Spring)
+  - Store all configuration data of the system in one place
+  - Allow to refresh the system w/ new config data w/o downtime
+- Crendential (Vault)
+  - Store all credential data (password, secrect key...)
+- Monitor (Zipkin & ELK)
+  - Collects all logs or request tracing data for monitoring as well as debuging via UI for troubleshootings
+- KV Cache cluster (Redis)
+  - Store data for fast accessing like most search, even user carts...
+- Fulltext search (Elastic Search, Algolia service...)
+  - Used by search service
+  - Data would be indexed from all DBs whenever updating happens
+- Data warehouse
+  - Collection of slave DBs would be auto replicated in a period or realtime 
+  - This would be used for BI system
+- Clickstream
+  - Collects all user's activities on the app like viewing products/pages, search ... 
+  - Should be stored in NoSQL database like Aurora that supports big query for marketting campaign...
+- Notification service
+  - Sending notifications like email, push message
+  - This subcribes some message queues then handle messages and might call a serverless service (e.g. Lamdba) to send/push notification
+- Asset service
+  - Handles asset actions like resize, store... that use Lamdba function, then all assets would be stored in cloud storage (e.g. S3)
+
 ## Technical Stack
 - Backend: Java, Spring Cloud, Netflix OSS
 - Frontend: ReactJS, Redux, NextJS

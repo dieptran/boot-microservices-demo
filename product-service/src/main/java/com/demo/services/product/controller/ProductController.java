@@ -1,5 +1,7 @@
 package com.demo.services.product.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,12 @@ public class ProductController {
 	@GetMapping("/health-check")
 	public ResponseEntity<String> healthCheck() throws JSONException {
 		return ResponseEntity.ok("alive");
+	}
+	
+	@GetMapping("/products")
+	public ResponseEntity<List<Product>> getProducts() {
+		List<Product> products = productService.getProducts();
+		return ResponseEntity.ok(products);
 	}
 
 	@GetMapping("/products/{id}")

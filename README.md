@@ -133,6 +133,31 @@ A typical ERD for this eCommerce site
 
 ![ERD](/assets/Entities_Diagram.png "ERD")
   
+- **ProductCatalog DB** (MongboDB)
+  - ProductInfo 
+    - Metadata only, such as name, desc, category, properties, etc...
+
+- **Inventory DB** (PostgreSQL)
+  - Products
+    - Physical product, real variants of product with business info like: quantity in inventory, price, etc...
+    - These data would be combined with info from ProductCatalog.ProductInfo (composition pattern) to make official product displayed in the site
+  - ProductPriceHistory
+    - Price history would be stored here for audit
+- **Commerce DB** (PostgreSQL)
+  - Orders
+  - OrderLineItems
+  - Shipments
+- **User DB** (PostgreSQL)
+  - Users
+    - Store all users includes Admins or Customers that distinguishes by Role field
+  - Addresses
+    - Store all addresses of all users
+  - UserAbandonCarts
+    - Store list of products in customer's cart, this info would be used for marketing (abandoned cart email) or auto load when the customer logs in
+- **Audit DB** (MongoDB)
+  - AuditLog
+    - Store all user activities that s/he made on data object for audit
+
 #### In-used DB types
 - *PostgreSQL*: for Commerce/Inventory/... services to be able use ACID when data is sensity and need to be run in BI system later
 - *MongoDB*: for Product Catalog service or UserBehaviors analytics when its data mostly is un-structured, complex data.

@@ -228,14 +228,42 @@ Wait util see `Tomcat started on port(s): 9000 (http)...` --> Order service is r
 
 #### API test
 Note that seed data was set during the startup.
-Seed data includes only one product with `id = 1`
+Seed data includes 3 products for testing purpose
+
+1. Get all products
+
+        # curl -v http://localhost:8000/products
+        
+   Returned payload
+   
+        [
+            {
+                "id": 1,
+                "name": "MacBook Pro 2020",
+                "description": "The brand new",
+                "quantity": 5
+            },
+            {
+                "id": 2,
+                "name": "MacBook Air 2020",
+                "description": "Refurbished one",
+                "quantity": 10
+            },
+            {
+                "id": 3,
+                "name": "Surface 2019",
+                "description": "Max options",
+                "quantity": 15
+            }
+        ]
         
 1. Get a product by `id = 1`
 
         # curl -v http://localhost:8000/products/1
         
    Returned payload
-   ``{"id":1,"name":"MacBook Pro 2020","description":"The brand new","quantity":5}``
+   
+       {"id":1,"name":"MacBook Pro 2020","description":"The brand new","quantity":5}
    
 2. Create order
 

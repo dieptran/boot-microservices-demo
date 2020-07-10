@@ -150,14 +150,20 @@ This sample code demontrate a inter-service communication between: **OrderServic
 #### Product Service
 `Host: localhost:8000`
 
-1. GET PRODUCT BY ID
+1. GET PRODUCTS
+
+        GET /products
+        
+        Params: NO
+        
+2. GET PRODUCT BY ID
 
         GET /products/{id}
 
         Params:
             - id (Long): identifier of product
 
-2. CHECK PRODUCT AVAIBILITY
+3. CHECK PRODUCT AVAIBILITY
 
         GET /products/{id}/avaibility/{orderQuantity}
 
@@ -165,7 +171,7 @@ This sample code demontrate a inter-service communication between: **OrderServic
             - id (Long): identifier of product
             - orderQuantity (Int): product quantity for checking
 
-3. DESCREASE PRODUCT QUANTITY
+4. DESCREASE PRODUCT QUANTITY
 
         PUT /products/{id}/decreaseQuantity/{orderedQuantity}
 
@@ -257,7 +263,7 @@ Seed data includes 3 products for testing purpose
             }
         ]
         
-1. Get a product by `id = 1`
+2. Get a product by `id = 1`
 
         # curl -v http://localhost:8000/products/1
         
@@ -265,11 +271,11 @@ Seed data includes 3 products for testing purpose
    
        {"id":1,"name":"MacBook Pro 2020","description":"The brand new","quantity":5}
    
-2. Create order
+3. Create order
 
 `Create order` would do a *inter-service communication* by calling to `product-service` via Feign proxy for checking inventory quantity against ordered quantity. 
 
-2.1 Order quantity is ready to place
+3.1 Order quantity is ready to place
 
         curl -v -X POST localhost:9000/orders -H 'Content-type:application/json' -d '{"customerEmail": "customer@mail.com", "productId": 1, "price": 1000, "quantity": 1}'
         
@@ -304,7 +310,7 @@ Seed data includes 3 products for testing purpose
         "customerEmail":"customer@mail.com"
      }
       
-2.2 Order quantity is greater than quantity in inventory  --> invalid
+3.2 Order quantity is greater than quantity in inventory  --> invalid
 
         curl -v -X POST localhost:9000/orders -H 'Content-type:application/json' -d '{"customerEmail": "customer@mail.com", "productId": 1, "price": 1000, "quantity": 1000}'
        

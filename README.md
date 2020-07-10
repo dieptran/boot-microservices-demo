@@ -88,8 +88,7 @@ EXPLANATIONS
   - Collection of slave DBs would be auto replicated in a period or realtime 
   - This would be used for BI system
 - Clickstream
-  - Collects all user's activities on the app like viewing products/pages, search ... 
-  - Should be stored in NoSQL database like Aurora that supports big query for marketting campaign...
+  - Collects and push all user's activities on the app like viewing products/pages, search ... as messages to a message broker, then be stored in NoSQL database like Aurora that supports big query for analytics
 - Notification service
   - Sending notifications like email, push message
   - This subcribes some message queues then handle messages and might call a serverless service (e.g. Lamdba) to send/push notification

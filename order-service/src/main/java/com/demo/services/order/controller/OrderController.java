@@ -30,7 +30,7 @@ public class OrderController {
 
 	@GetMapping("/health-check")
 	public ResponseEntity<String> healthCheck() {
-		return ResponseEntity.ok().body("{status: \"ok\"}");
+		return ResponseEntity.ok().body("alive");
 	}
 	
 	@GetMapping("/orders/{id}")

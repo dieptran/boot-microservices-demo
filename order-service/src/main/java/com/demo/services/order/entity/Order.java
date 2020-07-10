@@ -39,19 +39,16 @@ public class Order {
 	private Instant orderDate;
 
 	@Column(name = "subTotal")
-	@ColumnDefault("0")
-	private Double subTotal;
+	private Double subTotal = 0.0;
 
 	@Column(name = "tax")
-	@ColumnDefault("0")
-	private Double tax;
+	private Double tax = 0.0;
 
 	@Column(name = "discount")
-	@ColumnDefault("0")
-	private Double discount;
+	private Double discount = 0.0;
 
 	@Column(name = "total", nullable = false)
-	private Double total;
+	private Double total = 0.0;
 
 	@Column(name = "status", nullable = false)
 	@Enumerated(EnumType.STRING)
